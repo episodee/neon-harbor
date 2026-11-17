@@ -1,0 +1,4 @@
+const KEY='neon-harbor-save-v1';
+export function loadSave(){try{const data=JSON.parse(localStorage.getItem(KEY)||'null');return data&&data.version===1?data:null;}catch{return null;}}
+export function saveGame(game){const p=game.player;const data={version:1,cash:p.cash,health:p.health,x:p.x,z:p.z,heading:p.heading,missions:game.missions.complete,index:game.missions.index,bestWanted:game.police.best};try{localStorage.setItem(KEY,JSON.stringify(data));return true;}catch{return false;}}
+export function restore(game,data){if(!data)return;game.player.cash=data.cash||0;game.player.health=Math.max(25,data.health||100);game.player.x=data.x||0;game.player.z=data.z||0;game.player.heading=data.heading||0;game.missions.complete=data.missions||0;game.missions.index=Math.min(data.index||0,3);game.police.best=data.bestWanted||0;}

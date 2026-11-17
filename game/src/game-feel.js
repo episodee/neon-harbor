@@ -1,0 +1,2 @@
+// Event-driven impact feedback: bounded trauma, particles and audio stay presentation-only.
+export function createGameFeel(audio){let trauma=0,phase=0;const tiers={small:.16,medium:.38,large:.82};return{trigger(tier,burst){trauma=Math.max(trauma,tiers[tier]||.2);if(tier==='large')audio.hit();if(burst)burst();},update(dt){trauma=Math.max(0,trauma-dt*.85);phase+=dt*18;return{x:Math.sin(phase)*trauma*trauma*.24,y:Math.sin(phase*1.71)*trauma*trauma*.13};},get trauma(){return trauma;}};}
